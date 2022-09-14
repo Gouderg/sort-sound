@@ -9,7 +9,7 @@ void SelectionSort::sort(Oscillo *os) {
                 min = j;
             }
         }
-        if (min != i) os->update(i, min, false);
+        if (min != i) os->update(i, min, true, false);
     }
-    os->update(0, 0, true);  
+    os->update(0, 0, false, true);  
 }

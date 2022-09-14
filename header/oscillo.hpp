@@ -25,12 +25,13 @@ class Oscillo {
         // Setter.
         void setKeys(const std::array<int, NB_FREQ> keys) {this->keys = keys;}
         void setWaves(const std::unordered_map<int, Wave> waves) {this->waves = waves;}
+        void setKey(const int index, const int value) {this->keys[index] = value;}
 
         // Swap elements.
         void swap(const int i, const int j);
 
         // Update.
-        void update(const int i, const int j, const bool end);
+        void update(const int i, const int j, const bool isSwap = false, const bool isEnd = false);
 
         // Opertor.
         friend std::ostream& operator<<(std::ostream&, const Oscillo&);

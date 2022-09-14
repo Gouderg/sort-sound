@@ -121,6 +121,7 @@ void Gui::animation(Oscillo* os) {
         // Show.
         this->window->display();
     }
+
 }
 
 // Wait for ms milliseconds

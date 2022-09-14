@@ -5,6 +5,7 @@
 
 #include "../sort/BubbleSort.hpp"
 #include "../sort/SelectionSort.hpp"
+#include "../sort/InsertionSort.hpp"
 
 #include <thread>
 
@@ -27,7 +28,7 @@ int main(int argc, char *argv[]) {
 
     // Create Oscillo object and Algorithm Object.
     Oscillo os(gui);
-    SelectionSort al1;
+    InsertionSort al1;
 
     // Shuffle.
     os.setKeys(al1.shuffle(os.getKeys()));

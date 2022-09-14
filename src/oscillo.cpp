@@ -22,13 +22,17 @@ void Oscillo::swap(const int i, const int j) {
 }
 
 // Update.
-void Oscillo::update(const int i, const int j, const bool end) {
-    swap(i, j);
-    if (end) {
+void Oscillo::update(const int i, const int j, const bool isSwap, const bool isEnd) {
+    if (isEnd) {
         this->interface->animation(this);
     } else {
+        if (isSwap) {
+            swap(i, j);
+        } else {
+            setKey(i, j);
+        }
         this->interface->update(this, i, j);
-    }
+    }   
 }
 
 // Display an object.
