@@ -3,6 +3,7 @@ CFLAGS = -W -Wall -g
 LDFLAGS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 SRC = $(wildcard src/*.cpp)
+SRC += $(wildcard sort/*.cpp)
 OBJS = $(SRC:.cpp=.o)
 HEADER = $(SRC:.cpp=.hpp)
  
@@ -15,4 +16,4 @@ sortman : $(OBJS)
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 clean:
-	rm src/*.o
+	rm src/*.o sort/*.o
