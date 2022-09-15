@@ -2,14 +2,14 @@
 
 // Constructor.
 Gui::Gui() {
-    this->stick_w = (SIZE_W - NB_FREQ + 1) / static_cast<double>(NB_FREQ);
+    this->stick_w = SIZE_W / static_cast<double>(NB_FREQ);
     this->stick_h = (SIZE_H - 20 - 20) / static_cast<double>(NB_FREQ);
     
     // Window.
     this->window = new sf::RenderWindow(sf::VideoMode(SIZE_W, SIZE_H), "Sort Sound");
     
     // FPS.
-    this->window->setFramerateLimit(60);
+    // this->window->setFramerateLimit(60);
 
 }
 
@@ -45,20 +45,14 @@ void Gui::update(Oscillo* os, const int mod_i, const int mod_j) {
         // Change the stick color if is moved.
         if (i == mod_i || i == mod_j) {
             line.setFillColor(sf::Color(255, 0, 0));
-            std::vector<sf::Int16> samples= os->getWave(os->getKey(i)).getSamples();
-            this->buffer.loadFromSamples(&samples[0], samples.size(), NB_CHANNEL, SAMPLING_RATE);
-            this->sound.setBuffer(this->buffer);
-
-            this->sound.setLoop(true);
-            this->sound.play();
-            delay_ms(10);
-            this->sound.stop();
+            make_sound(os->getWave(os->getKey(i)).getSamples(), 5);
         }
 
         // Draw on window.
         this->window->draw(line);
 
-        pos_w += (this->stick_w + 1.0);
+        pos_w += (this->stick_w);
+
 
     }
 
@@ -74,19 +68,14 @@ void Gui::animation(Oscillo* os) {
     // Cursor of stick position.
     double pos_w = 0.0;
 
+    // Draw all stick.
     for (int i = 0; i < NB_FREQ; i++) {
         // Draw stick.
         sf::RectangleShape line(sf::Vector2f(this->stick_h * (os->getKey(i) + 1)+MIN_STICK_H, this->stick_w));
         line.rotate(-90);
         line.setPosition(sf::Vector2f(pos_w, SIZE_H));
-        
-        
-
-        // Draw on window.
-        this->window->draw(line);
-
-        pos_w += (this->stick_w + 1.0);
-
+        this->window->draw(line);   // Draw on window.
+        pos_w += this->stick_w;   // Increment position.
     }
 
     // Show.
@@ -104,19 +93,13 @@ void Gui::animation(Oscillo* os) {
         
         // Change the stick color if is moved.
         line.setFillColor(sf::Color(0, 255, 0));
-        std::vector<sf::Int16> samples= os->getWave(os->getKey(i)).getSamples();
-        this->buffer.loadFromSamples(&samples[0], samples.size(), NB_CHANNEL, SAMPLING_RATE);
-        this->sound.setBuffer(this->buffer);
 
-        this->sound.setLoop(true);
-        this->sound.play();
-        delay_ms(20);
-        this->sound.stop();
+        make_sound(os->getWave(os->getKey(i)).getSamples(), 5);
 
         // Draw on window.
         this->window->draw(line);
 
-        pos_w += (this->stick_w + 1.0);
+        pos_w += this->stick_w;
 
         // Show.
         this->window->display();
@@ -130,3 +113,12 @@ void Gui::delay_ms(int ms) {
     while (Timer.getElapsedTime().asMilliseconds() < ms);
 }
 
+void Gui::make_sound(std::vector<int16_t> samples, int delay) {
+    this->buffer.loadFromSamples(&samples[0], samples.size(), NB_CHANNEL, SAMPLING_RATE);
+    this->sound.setBuffer(this->buffer);
+
+    this->sound.setLoop(true);
+    this->sound.play();
+    delay_ms(delay);
+    this->sound.stop();
+}

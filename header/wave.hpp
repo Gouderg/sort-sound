@@ -15,7 +15,7 @@ class Wave {
 
         // Getter.
         int getFreq() const {return freq;}
-        std::vector<int16_t> getSamples() const {return samples;}
+        std::vector<int16_t> getSamples() {return samples;}
 
         // Setter.
         void setFreq(const int freq) {this->freq = freq;}

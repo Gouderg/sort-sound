@@ -20,7 +20,7 @@ class Gui: public InterfaceBase {
         void run();
         void update(Oscillo* os, const int mod_i, const int mod_j);
         void animation(Oscillo* os);
-
+        void make_sound(std::vector<int16_t> samples, int delay);
         void delay_ms(int ms);
 
     private:
