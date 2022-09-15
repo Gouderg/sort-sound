@@ -55,3 +55,13 @@ int menu(std::string &sortName, int &argc, char **argv) {
 
     return 1;
 }
+
+AlgoBase* getSortAlgorithm(const std::string sortName) {
+
+    if (sortName == "InsertionSort") return new InsertionSort();
+    else if (sortName == "BubbleSort") return new BubbleSort();
+    else if (sortName == "SelectionSort") return new SelectionSort();
+    else if (sortName == "QuickSort") return new QuickSort();
+
+    return new SelectionSort();
+}

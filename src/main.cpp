@@ -14,13 +14,13 @@
 int main(int argc, char *argv[]) {
 
     /*  Menu input.  */
-    // std::string sortName;
+    std::string sortName;
     
     // Send to menu to get the value.
-    // if (!menu(sortName, argc, argv)) return 0;
+    if (!menu(sortName, argc, argv)) return 0;
        
     // sortName = "BubbleSort";
-    // std::cout << sortName << std::endl;
+    std::cout << sortName << std::endl;
 
     // Create UI.
     Gui *gui = new Gui();
@@ -30,17 +30,18 @@ int main(int argc, char *argv[]) {
 
     // Create Oscillo object and Algorithm Object.
     Oscillo os(gui);
-    SelectionSort al1;
+    AlgoBase *al1 = getSortAlgorithm(sortName);
 
     // Shuffle.
-    os.setKeys(al1.shuffle(os.getKeys()));
+    os.setKeys(al1->shuffle(os.getKeys()));
 
     // Sort.
-    al1.sort(&os);
+    al1->sort(&os);
 
     // Finish.
     th.join();
     delete gui;
+    delete al1;
 
     return 0;
 }

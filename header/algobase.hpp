@@ -17,9 +17,9 @@ class AlgoBase {
 
         // Virtual Desctructor.
         virtual ~AlgoBase(){}
-        
+
         // Virtual sort.
-        virtual void sort(Oscillo *os) = 0; 
+        virtual void sort(Oscillo *os) = 0;
 
         static std::array<int, NB_FREQ> shuffle(std::array<int, NB_FREQ> freqs); 
 
