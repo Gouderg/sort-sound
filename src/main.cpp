@@ -1,5 +1,7 @@
 #include "../header/menu.hpp"
+#include "../header/interfacebase.hpp"
 #include "../header/gui.hpp"
+#include "../header/shell.hpp"
 #include "../header/oscillo.hpp"
 
 
@@ -15,21 +17,24 @@ int main(int argc, char *argv[]) {
 
     /*  Menu input.  */
     std::string sortName;
+    int gui_mode = 1;
     
     // Send to menu to get the value.
-    if (!menu(sortName, argc, argv)) return 0;
-       
-    // sortName = "BubbleSort";
-    std::cout << sortName << std::endl;
+    if (!menu(sortName, gui_mode, argc, argv)) return 0;
 
     // Create UI.
-    Gui *gui = new Gui();
-
+    InterfaceBase *gui = nullptr; 
+    if (gui_mode) {
+        gui = new Gui();
+    } else {
+        gui = new Shell();
+    }
+    
     // Launch in other thread.
-    std::thread th(&Gui::run, gui);
+    std::thread th(&InterfaceBase::run, gui); 
 
     // Create Oscillo object and Algorithm Object.
-    Oscillo os(gui);
+    Oscillo os(gui, gui_mode);
     AlgoBase *al1 = getSortAlgorithm(sortName);
 
     // Shuffle.
@@ -40,6 +45,8 @@ int main(int argc, char *argv[]) {
 
     // Finish.
     th.join();
+
+    // Free.
     delete gui;
     delete al1;
 

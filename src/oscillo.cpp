@@ -1,14 +1,20 @@
 #include "../header/oscillo.hpp"
 
 // Constructor.
-Oscillo::Oscillo(InterfaceBase *gui) {
-    this->step_f = (MAX_FREQ - MIN_FREQ) / NB_FREQ;
-    int freq = MIN_FREQ;
+Oscillo::Oscillo(InterfaceBase *gui, int mode) {
+    if (mode) {
+        this->step_f = (MAX_FREQ - MIN_FREQ) / NB_FREQ;
+        int freq = MIN_FREQ;
 
-    for (int i = 0; i < NB_FREQ; i++) {
-        this->waves[i] = Wave(freq);
-        this->keys[i] = i;
-        freq += step_f;
+        for (int i = 0; i < NB_FREQ; i++) {
+            this->waves[i] = Wave(freq);
+            this->keys[i] = i;
+            freq += step_f;
+        }
+    } else {
+        for (int i = 0; i < NB_FREQ; i++) {
+            this->keys[i] = i;
+        }
     }
 
     this->interface = gui;

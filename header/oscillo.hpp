@@ -14,7 +14,7 @@ class Oscillo {
 
     public:
         // Constructor.
-        Oscillo(InterfaceBase *gui);
+        Oscillo(InterfaceBase *gui, int mode);
 
         // Getter.
         std::array<int, NB_FREQ> getKeys() const {return keys;}

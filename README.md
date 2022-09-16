@@ -23,3 +23,14 @@ https://www.youtube.com/watch?v=5xd9BMxoXqo
 
 - C++ 
 - SFML 2.5
+
+# Ubuntu
+
+sudo nano /etc/modprobe.d/blacklist.conf
+
+Comment :
+```
+# ugly and loud noise, getting on everyone's nerves; this should be done by a
+# nice pulseaudio bing (Ubuntu: #77010)
+blacklist pcspkr
+``` 
