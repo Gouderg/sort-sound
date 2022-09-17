@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include "../header/interfacebase.hpp"
 
 class Shell: public InterfaceBase {
@@ -12,5 +13,6 @@ class Shell: public InterfaceBase {
     
     private:
         long nbSwap;
+        clock_t start, end;
 
 };

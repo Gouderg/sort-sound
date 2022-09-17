@@ -14,6 +14,7 @@
 #include <thread>
 
 int main(int argc, char *argv[]) {
+    std::cout << __cplusplus << std::endl;
 
     /*  Menu input.  */
     std::string sortName;

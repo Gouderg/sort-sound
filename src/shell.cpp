@@ -3,6 +3,9 @@
 // Construtor.
 Shell::Shell() {
     this->nbSwap = 0;
+    this->start = clock();
+
+
 }
 
 void Shell::update(Oscillo* os, const int mod_i, const int mod_j) {
@@ -10,5 +13,9 @@ void Shell::update(Oscillo* os, const int mod_i, const int mod_j) {
 }
 
 void Shell::animation(Oscillo* os) {
-    std::cout << "Nombre de swap effectué: " << this->nbSwap << std::endl;
+    this->end = clock();
+
+    std::cout << "Time execution: " << ((float) this->end - this->start)/CLOCKS_PER_SEC << " sec" << std::endl;
+
+    std::cout << "Nunber of swap:  " << this->nbSwap << std::endl;
 }
